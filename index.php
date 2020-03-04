@@ -19,12 +19,12 @@
             <ul id="proyectos">
                 <li>
                     <a href="#">
-                        Diseño Página Web
+                        Proyecto 1
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        Nuevo Sitio en wordPress
+                        Proyecto 2
                     </a>
                 </li>
             </ul>
