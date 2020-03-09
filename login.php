@@ -1,11 +1,21 @@
 <?php
+    session_start();
     include 'inc/funciones/funciones.php';
     include 'inc/templates/header.php';
+
+    if(isset($_GET['cerrar_sesion'])){
+        $_SESSION = array();
+    }
+
 ?>
 
     <div class="contenedor-formulario">
         <h1>UpTask</h1>
         <form id="formulario" class="caja-login" method="post">
+           <!-- <div class = "campo">
+                <img src="img/login.jpg" alt="Login">
+            </div>
+            -->
             <div class="campo">
                 <label for="usuario">Usuario: </label>
                 <input type="text" name="usuario" id="usuario" placeholder="Usuario">
