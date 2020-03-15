@@ -192,6 +192,29 @@ INSERT INTO `sequence_data` (`nombre`,`incremento`,`min_valor`,`max_valor`,`cur_
 
 
 --
+-- Definition of table `usu_rol_pro`
+--
+
+DROP TABLE IF EXISTS `usu_rol_pro`;
+CREATE TABLE `usu_rol_pro` (
+  `id_usuario` int(11) NOT NULL DEFAULT '0',
+  `id_rol` int(11) NOT NULL DEFAULT '0',
+  `id_proyecto` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_usuario`,`id_rol`),
+  KEY `FK_usu_rol_pro_2` (`id_rol`),
+  CONSTRAINT `FK_usu_rol_pro_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `FK_usu_rol_pro_2` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `usu_rol_pro`
+--
+
+/*!40000 ALTER TABLE `usu_rol_pro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usu_rol_pro` ENABLE KEYS */;
+
+
+--
 -- Definition of table `usuarios`
 --
 
