@@ -1,0 +1,39 @@
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `fn_CURVALUE`(VSEC_NAME VARCHAR(11)) RETURNS bigint(20)
+BEGIN
+   DECLARE EXIST_SEC INT;
+   DECLARE VCUR_VALOR BIGINT(20);
+
+   SET EXIST_SEC = (SELECT count(1) FROM sequece_data where nombre = VSEC_NAME);
+   SET VCUR_VALOR = NULL;
+
+   IF EXIST_SEC > 0 THEN
+      SET VCUR_VALOR = (SELECT CUR_VALOR FROM sequece_data where nombre = VSEC_NAME);
+   END IF;
+
+
+
+   RETURN VCUR_VALOR;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` FUNCTION `fn_NEXTVALUE`(VSEC_NAME VARCHAR(50)) RETURNS bigint(20)
+BEGIN
+   DECLARE EXIST_SEC INT;
+   DECLARE VCUR_VALOR BIGINT(20);
+
+   SET EXIST_SEC = (SELECT count(1) FROM sequece_data where nombre = VSEC_NAME);
+
+   IF EXIST_SEC > 0 THEN
+      UPDATE sequece_data
+      SET CUR_VALOR = IF (  (IFNULL(CUR_VALOR,0)+INCREMENTO) < MAX_VALOR,
+                             IFNULL(CUR_VALOR,0)+INCREMENTO,
+                             MAX_VALOR);
+   END IF;
+
+   SET VCUR_VALOR = (SELECT CUR_VALOR FROM sequece_data where nombre = VSEC_NAME);
+
+   RETURN VCUR_VALOR;
+END$$
+DELIMITER ;
